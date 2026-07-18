@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aya — Jasa Bikin Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #17161a;
+        --surface: #201d22;
+        --surface-hi: #2a262c;
+        --border: #35313a;
+        --text: #ede9e3;
+        --muted: #948e88;
+        --accent: #e07a30;
+        --accent-dim: #6b4426;
+        --ok: #86a988;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 840px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* nav */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(23, 22, 26, 0.85);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 24px;
+        max-width: 840px;
+        margin: 0 auto;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+      }
+      .navbar .dots {
+        display: flex;
+        gap: 6px;
+      }
+      .navbar .dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .navbar .dots span:nth-child(1) {
+        background: #e0705f;
+      }
+      .navbar .dots span:nth-child(2) {
+        background: #e0b95f;
+      }
+      .navbar .dots span:nth-child(3) {
+        background: var(--ok);
+      }
+      .navbar .path {
+        color: var(--muted);
+      }
+      .navbar .path b {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* hero */
+      .hero {
+        padding: 72px 0 48px;
+      }
+      .terminal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+      }
+      .terminal-head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .terminal-head span.d {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--border);
+      }
+      .terminal-body {
+        padding: 28px 24px 32px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14.5px;
+      }
+      .terminal-body .prompt {
+        color: var(--ok);
+      }
+      .terminal-body .cmd {
+        color: var(--text);
+      }
+      .terminal-body .out {
+        color: var(--muted);
+        margin-top: 14px;
+      }
+      .hero h1 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(38px, 7vw, 58px);
+        font-weight: 400;
+        font-style: italic;
+        color: var(--text);
+        margin: 18px 0 8px;
+        line-height: 1.05;
+      }
+      .hero h1 .accent {
+        color: var(--accent);
+        font-style: normal;
+      }
+      .hero p.tagline {
+        color: var(--muted);
+        font-size: 16px;
+        max-width: 520px;
+        margin-bottom: 20px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background: var(--surface-hi);
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+
+      /* section headers */
+      .section {
+        padding: 56px 0;
+      }
+      .section-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12.5px;
+        color: var(--accent);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-label::before {
+        content: "//";
+        color: var(--border);
+      }
+      .section h2 {
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(26px, 4vw, 34px);
+        margin-bottom: 28px;
+      }
+
+      /* about */
+      .about p {
+        color: var(--muted);
+        margin-bottom: 14px;
+        max-width: 640px;
+      }
+      .about strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      /* projects */
+      .project {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 22px 22px 20px;
+        margin-bottom: 18px;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .project:hover {
+        border-color: var(--accent-dim);
+        transform: translateY(-2px);
+      }
+      .project-shot {
+        width: 100%;
+        border-radius: 7px;
+        border: 1px solid var(--border);
+        margin-bottom: 14px;
+        display: block;
+        background: var(--surface-hi);
+      }
+      .project-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .project-name {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .project-name .slash {
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .project-link {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12.5px;
+        color: var(--accent);
+        border: 1px solid var(--accent-dim);
+        padding: 4px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+      .project-link:hover {
+        background: var(--accent-dim);
+      }
+      .project-desc {
+        color: var(--muted);
+        font-size: 14.5px;
+        margin: 10px 0 14px;
+      }
+      .stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .stack span {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11.5px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: var(--surface-hi);
+        color: var(--ok);
+        border: 1px solid var(--border);
+      }
+
+      /* footer / contact */
+      footer {
+        padding: 56px 0 72px;
+        border-top: 1px solid var(--border);
+      }
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .contact-btn {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+      }
+      .contact-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .foot-note {
+        color: var(--muted);
+        font-size: 12.5px;
+        margin-top: 32px;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      @media (max-width: 600px) {
+        .terminal-body {
+          font-size: 13px;
+        }
+        .project-top {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      /* desktop refinements */
+      @media (min-width: 900px) {
+        .wrap {
+          max-width: 1040px;
+        }
+        .navbar {
+          max-width: 1040px;
+        }
+
+        .hero {
+          padding: 96px 0 64px;
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 48px;
+          align-items: center;
+        }
+        .hero h1 {
+          font-size: clamp(46px, 4.2vw, 62px);
+        }
+        .hero .terminal {
+          order: 2;
+        }
+        .hero .hero-text {
+          order: 1;
+        }
+
+        #projects .project-list {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+        .project-list .project {
+          margin-bottom: 0;
+        }
+        .project-shot {
+          height: 180px;
+          object-fit: cover;
+        }
+
+        footer .contact-row {
+          gap: 14px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .wrap {
+          max-width: 1120px;
+        }
+        .navbar {
+          max-width: 1120px;
+        }
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="navbar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="path">~/<b>aya</b>/portfolio</div>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <section class="hero">
+        <div class="terminal">
+          <div class="terminal-head">
+            <span class="d"></span><span class="d"></span
+            ><span class="d"></span>
+            &nbsp;zsh — 80x24
+          </div>
+          <div class="terminal-body">
+            <span class="prompt">aya@dev</span
+            ><span class="cmd">:~$ cat layanan.txt</span>
+            <div class="out">
+              bikin website sesuai kebutuhan usaha lu — cepat, rapi, nggak
+              ribet.
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-text">
+          <h1>
+            Butuh website<br />buat usaha lu?
+            <span class="accent">Gue bikinin.</span>
+          </h1>
+          <p class="tagline">
+            Halo, gue Aya. Gue bikin website simpel dan profesional buat toko,
+            cafe, atau usaha kecil — biar makin gampang dicari dan dipercaya
+            pelanggan.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Landing Page</span>
+            <span class="tag">Toko Online</span>
+            <span class="tag">Company Profile</span>
+            <span class="tag">Custom Sesuai Request</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section about">
+        <div class="section-label">kenapa gue</div>
+        <h2>Kenapa pilih gue?</h2>
+        <p>
+          <strong>Harga bersahabat.</strong> Cocok buat usaha kecil yang baru
+          mau punya website, tanpa biaya bulanan yang bikin pusing.
+        </p>
+        <p>
+          <strong>Cepat & komunikatif.</strong> Progress dikabarin terus, revisi
+          gampang, nggak perlu nunggu lama.
+        </p>
+        <p>
+          <strong>Lulusan bersertifikat.</strong> Coding Camp x DBS Foundation
+          (Full-Stack Web Development) & IDCamp x Dicoding (AI Engineer), jadi
+          bukan asal-asalan.
+        </p>
+      </section>
+
+      <section class="section">
+        <div class="section-label">layanan & harga</div>
+        <h2>Pilihan paket</h2>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">
+              <span class="slash">/</span>landing-page
+            </div>
+            <a href="#" class="project-link">mulai Rp150rb</a>
+          </div>
+          <p class="project-desc">
+            1 halaman — cocok buat cafe, toko, atau usaha jasa yang mau tampil
+            profesional online. Ada info, menu/produk, kontak, dan lokasi.
+          </p>
+          <div class="stack">
+            <span>1-2 hari kerja</span><span>Free 1x revisi</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name">
+              <span class="slash">/</span>toko-online
+            </div>
+            <a href="#" class="project-link">mulai Rp350rb</a>
+          </div>
+          <p class="project-desc">
+            Website dengan katalog produk, keranjang, dan proses checkout — biar
+            pelanggan bisa pesan langsung dari HP.
+          </p>
+          <div class="stack">
+            <span>3-5 hari kerja</span><span>Free 1x revisi</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-top">
+            <div class="project-name"><span class="slash">/</span>custom</div>
+            <a href="#" class="project-link">nego</a>
+          </div>
+          <p class="project-desc">
+            Punya kebutuhan lain? Sistem pencatatan, dashboard, atau fitur
+            khusus — cerita aja, gue bantu wujudin.
+          </p>
+          <div class="stack"><span>estimasi sesuai kebutuhan</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-label">contoh hasil kerja</div>
+        <h2>Beberapa yang udah pernah dibikin</h2>
+
+        <div class="project-list">
+          <div class="project">
+            <div class="project-top">
+              <div class="project-name">
+                <span class="slash">/</span>kawan umkm ai
+              </div>
+            </div>
+            <img
+              src="assets/Screenshotumkm.png"
+              alt="Screenshot Kawan UMKM AI"
+              class="project-shot"
+            />
+            <p class="project-desc">
+              Dashboard manajemen buat pelaku usaha kuliner (seller): estimasi
+              omzet otomatis, tracking total transaksi, katalog produk per
+              kategori, pencarian & filter menu, sampai fitur promosi otomatis
+              pakai AI.
+            </p>
+            <div class="stack">
+              <span>dashboard seller</span><span>promosi AI</span
+              ><span>katalog produk</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-top">
+              <div class="project-name">
+                <span class="slash">/</span>notes app
+              </div>
+            </div>
+            <img
+              src="assets/Screenshotnotes.jpeg"
+              alt="Screenshot Notes App"
+              class="project-shot"
+            />
+            <p class="project-desc">
+              Aplikasi pencatatan dengan fitur pencarian, pengelompokan
+              otomatis, dan tampilan yang enak dipakai sehari-hari.
+            </p>
+            <div class="stack">
+              <span>pencarian</span><span>filter otomatis</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-top">
+              <div class="project-name">
+                <span class="slash">/</span>dompetku — pencatat keuangan
+              </div>
+            </div>
+            <img
+              src="assets/Screenshotdompetku.png"
+              alt="Screenshot DompetKu"
+              class="project-shot"
+            />
+            <p class="project-desc">
+              Website buat catat pemasukan dan pengeluaran harian, tampilan
+              gelap yang nyaman di mata, cocok dipakai buat usaha kecil ngatur
+              kas.
+            </p>
+            <div class="stack">
+              <span>catat keuangan</span><span>dashboard simpel</span>
+            </div>
+          </div>
+
+          <div class="project">
+            <div class="project-top">
+              <div class="project-name">
+                <span class="slash">/</span>analisis data siswa
+              </div>
+            </div>
+            <img
+              src="assets/Screenshot9.png"
+              alt="Screenshot analisis data"
+              class="project-shot"
+            />
+            <p class="project-desc">
+              Sistem yang bisa ngelompokin dan memprediksi data secara otomatis
+              — contoh kalau usaha lu butuh analisis data pelanggan atau
+              penjualan.
+            </p>
+            <div class="stack">
+              <span>analisis data</span><span>prediksi otomatis</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="section-label">order</div>
+        <h2>Mau bikin website?</h2>
+        <p style="color: var(--muted); max-width: 520px">
+          Chat langsung aja, ceritain usaha lu kayak gimana dan butuh apa. Nanti
+          gue kasih rekomendasi paket + estimasi harga pastinya.
+        </p>
+        <div class="contact-row">
+          <a href="https://wa.me/6285640711720" class="contact-btn"
+            >Chat WhatsApp</a
+          >
+          <a href="https://github.com/hayatulkarimah02-blip" class="contact-btn"
+            >Lihat lebih banyak contoh (GitHub)</a
+          >
+        </div>
+        <div class="foot-note">// built by aya, 2026</div>
+      </footer>
+    </div>
+  </body>
+</html>
